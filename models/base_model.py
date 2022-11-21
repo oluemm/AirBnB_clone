@@ -8,11 +8,22 @@ from datetime import datetime
 class BaseModel:
     """A class that defines common method and attributes for other clases"""
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args, **kwargs):
         """Initialize the base model"""
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        if not kwargs:  # if no dictionary (key&value) argument is passed
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+        else:
+            for k, v in kwargs.items():
+                if k != "__class__":
+                    if k in ("created_at", "updated_at"):
+                        # Construct a date from the output of date.isoformat()
+                        # setattr(x, 'y', v) is equivalent to x.y = v''
+                        setattr(self, k, datetime.fromisoformat(v))
+                    # otherwise create a key and value pair of other attributes
+                    else:
+                        setattr(self, k, v)
 
     def __str__(self):
         """Returns a customized string representation
@@ -38,11 +49,9 @@ class BaseModel:
         # add __class__ key with class name as value
         dict_1["__class__"] = self.__class__.__name__
         for k, v in self.__dict__.items():
-            print(k, ":", v)
             if k in ("created_at", "updated_at"):
                 # convert datetime{2022-11-21 16:06:40.075755}
                 # to isoformat {2022-11-21T16:06:40.075755}
                 v = self.__dict__[k].isoformat()
-                print(k, ":", v)
                 dict_1[k] = v
         return dict_1
