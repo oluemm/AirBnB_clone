@@ -30,6 +30,28 @@ class TestBaseModel(unittest.TestCase):
         x2 = BaseModel()
         self.assertNotEqual(x1.id, x2.id)
 
+    def test_ids_str(self):
+        """
+        checks if the ID generated is str object
+        """
+        x = BaseModel()
+        self.assertTrue(type(x.id) is str)
+
+    def test_created_at_datetime(self):
+        """
+        cjecks that the attribute 'created_at" is a datetime 
+        """
+        x = BaseModel()
+        self.assertTrue(type(x.created_at) is datetime)
+
+    def test_updated_at_datetime(self):
+        """
+        checks that the attribute 'updtae_at' is datetime object
+        """
+        x = BaseModel()
+        self.assertTrue(type(x.updated_at) is datetime)
+
+
 if __name__ == "__main__":
     unittest.main()
 
