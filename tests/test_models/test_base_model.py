@@ -58,6 +58,33 @@ class TestBaseModel(unittest.TestCase):
         x = BaseModel()
         self.assertTrue(type(x.updated_at) is datetime)
 
+    def test_created_at_different(self):
+        """
+        checks the attribute 'created_at' of 2 models are different
+        """
+
+        x1 = BaseModel()
+        sleep(0.02)
+        x2 = BaseModel()
+        sleep(0.02)
+        self.assertLess(x1.created_ar, x2 created_at)
+
+    def test_args(self):
+        """
+        check the attribute 'args' not used
+        """
+
+        x = BaseModel(None)
+        self.assertNotIn(None, x.__dict__.values())
+
+    def test_created_at_equal_update_at(self):
+        """
+        check that created_at == updated_at at initiallization
+        """
+
+        x = BaseModel()
+        self.assertEqual(x.created_at, x.updated_at)
+
 
 if __name__ == "__main__":
     unittest.main()
