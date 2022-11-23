@@ -10,14 +10,15 @@ class FileStorage():
     Serializes instances to a JSON file
     and deserializes JSON file to instances
 
-    Private Class Attributes:
+    #### Private Class Attributes:
 
-    __file_path: `(string)` - path to the JSON file
-    __objects: `(dictionary)` - empty but will store all objects by <class name>.id
+    - __file_path: `(string)` - path to the JSON file
+    - __objects: `(dictionary)` - empty but will store all objects by <class name>.id
 
-    Public instance methods:
+    #### Public instance methods:
 
-    all(self): returns the dictionary __objects
+    - all(self): returns the dictionary __objects
+    - new(self, obj): sets in __objects the obj with key <obj class name>.id
     """
     # private class attributes
     __file_path = "file.json"
@@ -25,6 +26,13 @@ class FileStorage():
 
     def all(self):
         """
-        Returns the dictionary __objects
+        #### Returns:
+        `json`: the dictionary __objects
         """
         return self.__objects
+
+    def new(self, obj):
+        """
+        Sets in __objects the `obj` with key <obj class name>.id
+        """
+        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
