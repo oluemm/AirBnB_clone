@@ -10,10 +10,12 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Initialize the base model"""
+        from models import storage  # to avoid circular import
         if not kwargs:  # if no dictionary (key&value) argument is passed
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
         else:
             for k, v in kwargs.items():
                 if k != "__class__":
@@ -34,8 +36,10 @@ class BaseModel:
 
     def save(self):
         """Updates 'self.updated_at' with the current datetime"""
+        from models import storage  # to avoid circular import
         objects = []
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """
