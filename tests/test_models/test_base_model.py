@@ -4,6 +4,7 @@ A module that contains the test suite for the BaseModel class
 """
 import unittest
 import os
+from time import sleep
 from datetime import datetime
 from uuid import uuid4
 from models.base_model import BaseModel
@@ -67,7 +68,7 @@ class TestBaseModel(unittest.TestCase):
         sleep(0.02)
         x2 = BaseModel()
         sleep(0.02)
-        self.assertLess(x1.created_ar, x2 created_at)
+        self.assertLess(x1.created_at, x2.created_at)
 
     def test_args(self):
         """
