@@ -20,7 +20,7 @@ class FileStorage():
     - __objects: `(dictionary)` - empty but will store all
     objects by <class name>.id
 
-    #### Public instance methods:
+    #### Public Instance Methods:
 
     - all(self): returns the dictionary __objects
     - new(self, obj): sets in __objects the obj with key <obj class name>.id
