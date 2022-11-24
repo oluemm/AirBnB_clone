@@ -27,7 +27,7 @@ class TestBaseModel(unittest.TestCase):
         checks if the string representation is appropriate
         """
         x = BaseModel()
-        self.assertEqual(type(str(x)),str)
+        self.assertEqual(type(str(x)), str)
 
     def test_ids_unique(self):
         """
@@ -46,7 +46,7 @@ class TestBaseModel(unittest.TestCase):
 
     def test_created_at_datetime(self):
         """
-        cjecks that the attribute 'created_at" is a datetime 
+        cjecks that the attribute 'created_at" is a datetime
         """
         x = BaseModel()
         self.assertTrue(type(x.created_at) is datetime)
@@ -84,6 +84,24 @@ class TestBaseModel(unittest.TestCase):
 
         x = BaseModel()
         self.assertLess(x.created_at, x.updated_at)
+
+    def test_saveMethodel(self):
+        """Test save and reload methods"""
+        from models import storage
+
+        # create a new instance
+        my_model = BaseModel()
+        my_model.name = "My_First_Model"
+        my_model.my_number = 89
+        # call our save method to save the model instance
+        my_model.save()
+        # now reload the file
+        all_objs = storage.all()
+        # get the newly added instance by looping to the end
+        for obj_id in all_objs.keys():
+            obj = all_objs[obj_id]
+        # compare loaded instance to created instance
+        self.assertEqual(my_model, obj)
 
 
 if __name__ == "__main__":
