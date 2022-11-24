@@ -14,13 +14,4 @@ from models import storage
 
 class TestFileStorage(unittest.TestCase):
     """Test Cases for the class."""
-
-    # def test_path(self):
-    #     """Test to ensure path exists."""
-    #     self.assertEqual(os.path.isfile(FileStorage.__file_path), True)
-
-    def resetStorage(self):
-        """Resets Filestorage data"""
-        FileStorage.__objects = {}
-        if os.path.isfile(FileStorage.__file_path):
-            os.remove(FileStorage.__file_path)
+    pass
