@@ -45,13 +45,16 @@ class FileStorage():
         """
         Sets in __objects the `obj` with key <obj class name>.id
         """
-        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
+        # use the class name and object id as dict keys
+        kyz = f"{obj.__class__.__name__}.{obj.id}"
+        self.__objects[kyz] = obj
 
     def save(self):
         """
         Serialize __objects to the JSON file
         """
-        with open(self.__file_path, mode="w") as f:
+        json_file = self.__file_path
+        with open(json_file, mode="w") as f:
             dict_storage = {}
             for k, v in self.__objects.items():
                 dict_storage[k] = v.to_dict()
@@ -61,13 +64,17 @@ class FileStorage():
         """
         Deserializes existing JSON file to __objects
         """
+        json_file = self.__file_path
         try:
-            with open(self.__file_path, 'r') as f:
+            with open(json_file, 'r') as f:
                 # load the json file as instance object
-                instance = json.load(f)
-                for key in instance:
-                    self.__objects[key] = (
-                        class_dict[instance[key]["__class__"]](**instance[key])
-                        )
+                loaded_dict = json.load(f)
+                # remember that we are working wit a nested dictionary
+                # each value is a dict on its own
+                for vals in loaded_dict.values():
+                    # to get class names of each instance
+                    class_name = vals["__class__"]
+                    self.new(eval(class_name)(**vals))
+
         except Exception:
             pass

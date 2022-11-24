@@ -85,7 +85,7 @@ class TestBaseModel(unittest.TestCase):
         x = BaseModel()
         self.assertLess(x.created_at, x.updated_at)
 
-    def test_saveMethodel(self):
+    def test_save_reload(self):
         """Test save and reload methods"""
         from models import storage
 
