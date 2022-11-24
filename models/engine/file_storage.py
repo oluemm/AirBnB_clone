@@ -39,24 +39,27 @@ class FileStorage():
         #### Returns:
         `json`: the dictionary __objects
         """
-        return self.__objects
+        cls = type(self)
+        return cls.__objects
 
     def new(self, obj):
         """
         Sets in __objects the `obj` with key <obj class name>.id
         """
+        cls = type(self)
         # use the class name and object id as dict keys
         # eg. ClassName.objectid
         kyz = f"{obj.__class__.__name__}.{obj.id}"
         # create a k:v of the kyz and obj in __objects
         # ClassName.objectid: {"id":...}
-        self.__objects[kyz] = obj
+        cls.__objects[kyz] = obj
 
     def save(self):
         """
         Serialize __objects to the JSON file
         """
-        json_file = self.__file_path
+        cls = type(self)
+        json_file = cls.__file_path
         with open(json_file, mode="w") as f:
             dict_storage = {}  # initialize empty dict
             # get key and value from newly instantiated __objects
@@ -69,7 +72,8 @@ class FileStorage():
         """
         Deserializes existing JSON file to __objects
         """
-        json_file = self.__file_path
+        cls = type(self)
+        json_file = cls.__file_path
         try:
             with open(json_file, 'r') as f:
                 # load the json file as instance object
@@ -82,7 +86,7 @@ class FileStorage():
                     # using eval(), we can simply pass in class name as string
                     # and the dict items will be its parameters
                     # e.g. BaseModel('id': 'a56', 'created_at': '2022-'...)
-                    self.new(eval(class_name)(**vals))
+                    cls.new(eval(class_name)(**vals))
 
         except Exception:
             pass
