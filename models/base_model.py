@@ -55,7 +55,12 @@ class BaseModel:
         dict_1["__class__"] = self.__class__.__name__
         for k, v in self.__dict__.items():
             if k in ("created_at", "updated_at"):
-                # convert datetime{2022-11-21 16:06:40.075755}
+                # self.__dict__() returns a dict of
+                # instance attributes and values
+                # print("Here==>",self.__dict__)
+                # [k] simply sends in a key and gets it's
+                # value in our case, created_at or updated_at, then;
+                # converts datetime{2022-11-21 16:06:40.075755}
                 # to isoformat {2022-11-21T16:06:40.075755}
                 v = self.__dict__[k].isoformat()
                 dict_1[k] = v
