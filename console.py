@@ -10,10 +10,11 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = "(hbnb) "
 
-    def quit(self):
+    def do_quit(self, args):
         return True
-    def EOF(self):
+    def do_EOF(self, args):
         return
-
+    def do_greet(self, args):
+        print(f"Hi {args}")
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
