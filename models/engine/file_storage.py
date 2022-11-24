@@ -46,7 +46,10 @@ class FileStorage():
         Sets in __objects the `obj` with key <obj class name>.id
         """
         # use the class name and object id as dict keys
+        # eg. ClassName.objectid
         kyz = f"{obj.__class__.__name__}.{obj.id}"
+        # create a k:v of the kyz and obj in __objects
+        # ClassName.objectid: {"id":...}
         self.__objects[kyz] = obj
 
     def save(self):
@@ -55,9 +58,11 @@ class FileStorage():
         """
         json_file = self.__file_path
         with open(json_file, mode="w") as f:
-            dict_storage = {}
+            dict_storage = {}  # initialize empty dict
+            # get key and value from newly instantiated __objects
             for k, v in self.__objects.items():
                 dict_storage[k] = v.to_dict()
+            # dump as json string to file
             json.dump(dict_storage, f)
 
     def reload(self):
@@ -74,6 +79,9 @@ class FileStorage():
                 for vals in loaded_dict.values():
                     # to get class names of each instance
                     class_name = vals["__class__"]
+                    # using eval(), we can simply pass in class name as string
+                    # and the dict items will be its parameters
+                    # e.g. BaseModel('id': 'a56', 'created_at': '2022-'...)
                     self.new(eval(class_name)(**vals))
 
         except Exception:
