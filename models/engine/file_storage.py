@@ -39,14 +39,14 @@ class FileStorage():
         #### Returns:
         `json`: the dictionary __objects
         """
-        cls = type(self)
+        cls = FileStorage
         return cls.__objects
 
     def new(self, obj):
         """
         Sets in __objects the `obj` with key <obj class name>.id
         """
-        cls = type(self)
+        cls = FileStorage
         # use the class name and object id as dict keys
         # eg. ClassName.objectid
         kyz = f"{obj.__class__.__name__}.{obj.id}"
@@ -58,7 +58,7 @@ class FileStorage():
         """
         Serialize __objects to the JSON file
         """
-        cls = type(self)
+        cls = FileStorage
         json_file = cls.__file_path
         with open(json_file, mode="w") as f:
             dict_storage = {}  # initialize empty dict
@@ -72,7 +72,7 @@ class FileStorage():
         """
         Deserializes existing JSON file to __objects
         """
-        cls = type(self)
+        cls = FileStorage
         json_file = cls.__file_path
         try:
             with open(json_file, 'r') as f:
