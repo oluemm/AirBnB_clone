@@ -100,6 +100,28 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
+    def do_all(self, args):
+        """Prints all string representation of all
+        instances based or not on the class name.
+        Ex: $ all BaseModel or $ all.
+        `Example:`
+        >>> $ destroy BaseModel 1234-1234-1234
+        """
+        args = shlex.split(args)
+        all_instances = storage.all()
+        my_list = []
+        if len(args) == 0 :  # check if no arg is passed
+            for instances in all_instances:
+                my_list.append(str(all_instances[instances]))
+            print(my_list)
+        elif args[0] not in class_dict.keys():
+            print("** class doesn't exist **")
+        else:
+            class_name = args[0]
+            for instances in all_instances.keys():
+                if str(instances).startswith(class_name):
+                    my_list.append(str(all_instances[instances]))
+            print(my_list)
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
