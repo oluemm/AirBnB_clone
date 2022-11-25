@@ -2,7 +2,7 @@
 """Contains the entry point of the command interpreter"""
 import cmd
 import shlex
-from models import BaseModel
+import models
 
 
 class HBNBCommand(cmd.Cmd):
