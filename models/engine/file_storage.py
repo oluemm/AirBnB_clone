@@ -80,13 +80,9 @@ class FileStorage():
                 loaded_dict = json.load(f)
                 # remember that we are working wit a nested dictionary
                 # each value is a dict on its own
-                for vals in loaded_dict.values():
-                    # to get class names of each instance
-                    class_name = vals["__class__"]
-                    # using eval(), we can simply pass in class name as string
-                    # and the dict items will be its parameters
-                    # e.g. BaseModel('id': 'a56', 'created_at': '2022-'...)
-                    cls.new(eval(class_name)(**vals))
-
+                for key in loaded_dict.keys():
+                    class_name = loaded_dict[key]["__class__"]
+                    instance = loaded_dict[key]
+                    cls.__objects[key] = class_dict[class_name](**instance)
         except Exception:
             pass
