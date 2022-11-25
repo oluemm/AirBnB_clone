@@ -4,6 +4,7 @@ import cmd
 import shlex
 from models.base_model import BaseModel
 from models import class_dict
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -54,10 +55,25 @@ class HBNBCommand(cmd.Cmd):
             1234-1234-1234.
         """
         args = shlex.split(args)
+        # print(args)
         if len(args) == 0:  # check if no arg is passed
             print("** class name missing **")
             return
         elif args[0] not in class_dict.keys():
+            print("** class doesn't exist **")
+        elif len(args) < 2: # check if id is missing
+            print("** instance id missing **")
+        else:
+            class_name = args[0]
+            instance_id = args[1]
+            ciid = f"{class_name}.{instance_id}"
+            all_instances = storage.all()
+            if ciid in all_instances:
+                show_ins = all_instances[ciid]
+                # print(f"{class_name}[{instance_id}]")
+                print(show_ins)
+            else:
+                print("** no instance found **")
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
