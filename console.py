@@ -11,10 +11,18 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
     def do_quit(self, args):
+        """Quit command to exit the program console
+        """
         return True
     def do_EOF(self, args):
-        return
+        """Ctrl + D to exit the console gracefully
+        """
+        return True
     def do_greet(self, args):
         print(f"Hi {args}")
+    def emptyline(self):
+        """Modify the empty line method to do nothing"""
+        return
+
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
