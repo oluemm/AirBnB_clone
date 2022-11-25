@@ -6,13 +6,5 @@
 		"name": "My_First_Model",
 		"my_number": 89,
 		"__class__": "BaseModel"
-	},
-	"BaseModel.f1d4a51d-717c-40a1-83fd-67894b3c1256": {
-		"id": "f1d4a51d-717c-40a1-83fd-67894b3c1256",
-		"created_at": "2022-11-25T18:27:05.242973",
-		"updated_at": "2022-11-25T18:27:05.242984",
-		"name": "My_First_Model",
-		"my_number": 89,
-		"__class__": "BaseModel"
 	}
 }

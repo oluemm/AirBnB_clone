@@ -51,8 +51,7 @@ class HBNBCommand(cmd.Cmd):
         """Prints the string representation of an instance
         based on the class name and id.
         `Example:`
-        >>> $ show BaseModel
-            1234-1234-1234.
+        >>> $ show BaseModel 1234-1234-1234.
         """
         args = shlex.split(args)
         # print(args)
@@ -61,7 +60,7 @@ class HBNBCommand(cmd.Cmd):
             return
         elif args[0] not in class_dict.keys():
             print("** class doesn't exist **")
-        elif len(args) < 2: # check if id is missing
+        elif len(args) < 2:  # check if id is missing
             print("** instance id missing **")
         else:
             class_name = args[0]
@@ -74,6 +73,33 @@ class HBNBCommand(cmd.Cmd):
                 print(show_ins)
             else:
                 print("** no instance found **")
+
+    def do_destroy(self, args):
+        """Deletes an instance based on the class name
+        and id (save the change into the JSON file).
+        `Example:`
+        >>> $ destroy BaseModel 1234-1234-1234
+        """
+        args = shlex.split(args)
+        # print(args)
+        if len(args) == 0:  # check if no arg is passed
+            print("** class name missing **")
+            return
+        elif args[0] not in class_dict.keys():
+            print("** class doesn't exist **")
+        elif len(args) < 2:  # check if id is missing
+            print("** instance id missing **")
+        else:
+            class_name = args[0]
+            instance_id = args[1]
+            ciid = f"{class_name}.{instance_id}"
+            all_instances = storage.all()
+            if ciid in all_instances:
+                del all_instances[ciid]
+                storage.save()
+            else:
+                print("** no instance found **")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
