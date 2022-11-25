@@ -2,7 +2,8 @@
 """Contains the entry point of the command interpreter"""
 import cmd
 import shlex
-import models
+from models.base_model import BaseModel
+from models import class_dict
 
 
 class HBNBCommand(cmd.Cmd):
@@ -21,9 +22,6 @@ class HBNBCommand(cmd.Cmd):
         """
         print()
         return True
-
-    def do_greet(self, args):
-        print(f"Hi {args}")
 
     def emptyline(self):
         """Modify the empty line method to do nothing"""
@@ -48,6 +46,18 @@ class HBNBCommand(cmd.Cmd):
         except Exception:    # if class doesn't exist
             print("** class doesn't exist **")
 
+    def do_show(self, args):
+        """Prints the string representation of an instance
+        based on the class name and id.
+        `Example:`
+        >>> $ show BaseModel
+            1234-1234-1234.
+        """
+        args = shlex.split(args)
+        if len(args) == 0:  # check if no arg is passed
+            print("** class name missing **")
+            return
+        elif args[0] not in class_dict.keys():
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
