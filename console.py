@@ -30,7 +30,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         '''
-            Creates a new instance of BaseModel,
+            Creates a new instance of a given Model,
             saves it (to the JSON file) and prints the id.
             `Example:`$ create BaseModel
         '''
@@ -110,7 +110,7 @@ class HBNBCommand(cmd.Cmd):
         args = shlex.split(args)
         all_instances = storage.all()
         my_list = []
-        if len(args) == 0 :  # check if no arg is passed
+        if len(args) == 0:  # check if no arg is passed
             for instances in all_instances:
                 my_list.append(str(all_instances[instances]))
             print(my_list)
@@ -122,6 +122,56 @@ class HBNBCommand(cmd.Cmd):
                 if str(instances).startswith(class_name):
                     my_list.append(str(all_instances[instances]))
             print(my_list)
+
+    def do_update(self, args):
+        """Updates an instance based on the class name and id
+        by adding or updating attribute (save the change into the
+        JSON file).
+        `Example:`
+        >>> $ update BaseModel 1234-1234-1234 email "aibnb@mail. com".
+        Usage: update <class name> <id> <attribute name> '<attribute value>'
+        """
+        from models import FileStorage
+        args = shlex.split(args)
+        my_instances = storage.all()
+        try:
+            class_name = args[0]
+            if class_name not in class_dict.keys():
+                print("** class doesn't exist **")
+        except Exception:
+            print("** class name missing **")
+            return
+        try:
+            id = args[1]
+            ciid = f"{class_name}.{id}"
+            if ciid not in my_instances.keys():
+                print("** no instance found **")
+                return
+        except Exception:
+            print("** instance id missing **")
+            return
+        try:
+            attribute_name = args[2]
+        except Exception:
+            print("** attribute name missing **")
+            return
+        try:
+            attribute_val = args[3]
+        except Exception:
+            print("** value missing **")
+            return
+
+        update_dict = {}
+        for k,v in my_instances.items():
+            update_dict[k] = v.to_dict()
+        inner = update_dict[ciid]
+        inner[attribute_name] = attribute_val
+        print(update_dict)
+        for k in update_dict.keys():
+            new_instance = update_dict[k]
+            storage.new(eval(class_name)(**new_instance))
+            storage.save()
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
