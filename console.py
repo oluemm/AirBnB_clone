@@ -192,24 +192,43 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def default(self, line: str):
-        """Modify the default to catch varying commands
-        `Example usage`
-        * User.all()
+        """
+        Modify the default to catch varying commands
+
+        #### Example usage
+        * (hbnh) User.all()
+        * (hbnh) User.show("5f3f49e0-7499-4ef1-9558-5412e05c9333")
+        * (hbnh) User.destroy("246c227a-d5c1-403d-9bc7-6a47bb9f0f68")
         """
         parser_dict = {
             "all": self.do_all,
-            "count": self.do_count
+            "count": self.do_count,
+            "show": self.do_show,
+            "destroy": self.do_destroy
         }
         lst = []
-        for args in line.split('.'):
-            lst.append(args)
-        lst[1] = lst[1].replace("()", "")
+        line = line.replace("(", " ").replace(".", " ")\
+            .replace(")", "")
+        lst = shlex.split(line)
+        # print(lst)
         cls_name = lst[0]
         method = lst[1]
         if method in parser_dict:
-            parser_dict[method](cls_name)
+            if len(lst) == 2:
+                parser_dict[method](cls_name)
+            else:
+                arguments = f"{cls_name} {lst[2]}"
+                # print(f"{method}({arguments})")
+                parser_dict[method](arguments)
 
     def do_count(self, args: str):
+        """
+        #### Returns:
+        Total number of instances a class has
+        #### Usage:
+        <class>.count()
+        `Example`: BaseModel.count()
+        """
         args = shlex.split(args)
         all_instances = storage.all()
         my_list = []
@@ -221,7 +240,6 @@ class HBNBCommand(cmd.Cmd):
                 if str(instances).startswith(class_name):
                     my_list.append(str(all_instances[instances]))
             print(len(my_list))
-
 
 
 if __name__ == "__main__":
