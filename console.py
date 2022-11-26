@@ -197,7 +197,8 @@ class HBNBCommand(cmd.Cmd):
         * User.all()
         """
         parser_dict = {
-            "all": self.do_all
+            "all": self.do_all,
+            "count": self.do_count
         }
         lst = []
         for args in line.split('.'):
@@ -207,6 +208,20 @@ class HBNBCommand(cmd.Cmd):
         method = lst[1]
         if method in parser_dict:
             parser_dict[method](cls_name)
+
+    def do_count(self, args: str):
+        args = shlex.split(args)
+        all_instances = storage.all()
+        my_list = []
+        if args[0] not in class_dict.keys():
+            print("** class doesn't exist **")
+        else:
+            class_name = args[0]
+            for instances in all_instances.keys():
+                if str(instances).startswith(class_name):
+                    my_list.append(str(all_instances[instances]))
+            print(len(my_list))
+
 
 
 if __name__ == "__main__":
