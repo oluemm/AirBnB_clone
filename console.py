@@ -3,6 +3,7 @@
 import cmd
 import shlex
 from models.base_model import BaseModel
+from models.user import User
 from models import class_dict
 from models import storage
 
@@ -165,15 +166,26 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
             return
 
-        update_dict = {}
-        for k,v in my_instances.items():
+        update_dict = {}  # initialize empty dict
+        #  loop thru loaded instance's key & value pairs
+        for k, v in my_instances.items():
+            # add them to update_dict
+            # but bcos values are Model instances,
+            # we have to call our to_dict() method to
+            # serialize them
             update_dict[k] = v.to_dict()
-        inner = update_dict[ciid]
-        inner[attribute_name] = attribute_val
-        print(update_dict)
+        # now that we have a nested dictionary
+        # we get the id of the instance to be updated,
+        # and assign it to the variable update_me
+        update_me = update_dict[ciid]
+        # now we can edit the dict with the user's k:v in args
+        update_me[attribute_name] = attribute_val
         for k in update_dict.keys():
+            # get the class name of each instance
+            cls_name = update_dict[k]["__class__"]
+            # get an instance, and update it if identified by user
             new_instance = update_dict[k]
-            storage.new(eval(class_name)(**new_instance))
+            storage.new(eval(cls_name)(**new_instance))
             storage.save()
 
 

@@ -5,8 +5,9 @@ and deserializes JSON file to instances
 """
 import json
 from models.base_model import BaseModel
+from models.user import User
 
-class_dict = {"BaseModel": BaseModel}
+class_dict = {"BaseModel": BaseModel, "User": User}
 
 
 class FileStorage():
