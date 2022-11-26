@@ -192,6 +192,10 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def default(self, line: str):
+        """Modify the default to catch varying commands
+        `Example usage`
+        * User.all()
+        """
         parser_dict = {
             "all": self.do_all
         }
