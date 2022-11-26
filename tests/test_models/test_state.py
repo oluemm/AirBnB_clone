@@ -11,7 +11,7 @@ class TestStat(unittest.TestCase):
     def setUP(self):
         self.state = State()
 
-    def test_subclass_of_basemodel(self):
+    def test_state_subclass_of_basemodel(self):
         self.assertTrue(issubclass(type(self.state), BaseModel))
 
     def test_attr(self):

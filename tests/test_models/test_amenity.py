@@ -11,7 +11,7 @@ class TestAmenity(unittest.TestCase):
     def setUp(self):
         self.amenity = Amenity()
 
-    def test_subclass_of_basemodel(self):
+    def test_amenity_subclass_of_basemodel(self):
         self.assertTrue(issubclass(type(self.amenity), BaseModel))
 
     def test_attr(self):
