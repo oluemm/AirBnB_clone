@@ -17,6 +17,7 @@ class HBNBCommand(cmd.Cmd):
     for the AirBnB clone web application
     """
     prompt = "(hbnb) "
+    class_lists = [i for i in class_dict.keys()]
 
     def do_quit(self, args):
         """Quit command to exit the program console
@@ -254,12 +255,18 @@ class HBNBCommand(cmd.Cmd):
         #### Returns:
         Total number of instances a class has
         #### Usage:
-        <class>.count()
-        `Example`: BaseModel.count()
+        <class_name>.count()
+        count <class_name>
+        `Example`:
+        * BaseModel.count()
+        * count User
         """
         args = shlex.split(args)
         all_instances = storage.all()
         my_list = []
+        if len(args) < 1:
+            print("** class name missing **")
+            return
         if args[0] not in class_dict.keys():
             print("** class doesn't exist **")
         else:
@@ -268,6 +275,67 @@ class HBNBCommand(cmd.Cmd):
                 if str(instances).startswith(class_name):
                     my_list.append(str(all_instances[instances]))
             print(len(my_list))
+# ===================================================================
+# ====================== Auto Completions Functions =================
+# ===================================================================
+
+    def complete_all(self, text, line, begidx, endidx):
+        if not text:
+            completions = self.class_lists[:]
+        else:
+            completions = [
+                f
+                for f in self.class_lists
+                if f.startswith(text)
+                ]
+        return completions
+
+    def complete_count(self, text, line, begidx, endidx):
+        if not text:
+            completions = self.class_lists[:]
+        else:
+            completions = [
+                f
+                for f in self.class_lists
+                if f.startswith(text)
+                ]
+        return completions
+
+    def complete_create(self, text, line, begidx, endidx):
+        if not text:
+            completions = self.class_lists[:]
+        else:
+            completions = [
+                f
+                for f in self.class_lists
+                if f.startswith(text)
+                ]
+        return completions
+
+    def complete_show(self, text, line, begidx, endidx):
+        if not text:
+            # print(line)
+            completions = self.class_lists[:]
+        else:
+            # print(line)
+            completions = [
+                f
+                for f in self.class_lists
+                if f.startswith(text)
+                ]
+        return completions
+
+    def help_update(self):
+        text = """
+        Updates an instance based on the class name
+        and id by adding or updating attribute (save the
+        change into the JSON file).
+        Example:
+        >>> $ update BaseModel 1234-1234-1234 email "aibnb@mail. com".
+        Usage: update <class name> <id> <attribute name> '<attribute value>'
+        >>> $ <class_name>.update(<id> <attribute name> '<attribute value>')
+            """
+        print(text)
 
 
 if __name__ == "__main__":
