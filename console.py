@@ -199,6 +199,10 @@ class HBNBCommand(cmd.Cmd):
         * (hbnh) User.all()
         * (hbnh) User.show("5f3f49e0-7499-4ef1-9558-5412e05c9333")
         * (hbnh) User.destroy("246c227a-d5c1-403d-9bc7-6a47bb9f0f68")
+        * (hbnh) User.update("38f22813-2753-4d42-b37c-57a17f1e4f88",
+        "age", 89)
+        * (hbnh) User.update("38f22813-2753-4d42-b37c-57a17f1e4f88",
+        {'first_name': "John", "age": 89})
         """
         dict_funcs = {
             "all": self.do_all,
