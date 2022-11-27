@@ -38,6 +38,7 @@ class HBNBCommand(cmd.Cmd):
         Creates a new instance of a given Model,
         saves it (to the JSON file) and prints the id.
         `Example:`$ create BaseModel
+        `Example:`$ <class_name>.create()
         """
         if len(args) == 0:  # check if no arg is passed
             print("** class name missing **")
@@ -58,6 +59,7 @@ class HBNBCommand(cmd.Cmd):
         based on the class name and id.
         `Example:`
         >>> $ show BaseModel 1234-1234-1234.
+        >>> $ <class_name>.show(1234-1234-1234)
         """
         args = shlex.split(args)
         # print(args)
@@ -86,6 +88,7 @@ class HBNBCommand(cmd.Cmd):
         and id (save the change into the JSON file).
         `Example:`
         >>> $ destroy BaseModel 1234-1234-1234
+        >>> $ <class_name>.destroy(1234-1234-1234)
         """
         args = shlex.split(args)
         # print(args)
@@ -112,7 +115,9 @@ class HBNBCommand(cmd.Cmd):
         Prints all string representation of all
         instances based or not on the class name.
         `Example:`
-        >>> $ destroy BaseModel 1234-1234-1234
+        >>> $ all
+        >>> $ all BaseModel
+        >>> $ <class_name>.all()
         """
         args = shlex.split(args)
         all_instances = storage.all()
@@ -138,8 +143,8 @@ class HBNBCommand(cmd.Cmd):
         `Example:`
         >>> $ update BaseModel 1234-1234-1234 email "aibnb@mail. com".
         Usage: update <class name> <id> <attribute name> '<attribute value>'
+        >>> $ <class_name>.update(<id> <attribute name> '<attribute value>')
         """
-        from models import FileStorage
         args = shlex.split(args)
         my_instances = storage.all()
         try:
@@ -209,26 +214,27 @@ class HBNBCommand(cmd.Cmd):
             "count": self.do_count,
             "show": self.do_show,
             "destroy": self.do_destroy,
-            "update": self.do_update
+            "update": self.do_update,
+            "create": self.do_create
         }
-        lst = []
-        line = line.replace("(", " ").replace(".", " ")\
+        lst = line.replace("(", " ").replace(".", " ")\
             .replace(")", "").replace(",", " ").replace(":", "")\
             .replace("{", " ").replace("}", " ").replace("  ", " ")
-        lst = shlex.split(line)
-        # print(lst)
+        lst = shlex.split(lst)
+        print(lst)
         cls_name = lst[0]
         try:
             method = lst[1]
-            if lst > 1 or method in dict_funcs:
+            if method in dict_funcs:
                 if len(lst) == 2:
                     dict_funcs[method](cls_name)
                 elif len(lst) == 3:
-                    arguments = f"{cls_name} {lst[2]}"
+                    arguments = f"'{cls_name}' '{lst[2]}'"
                     # print(f"{method}({arguments})")
                     dict_funcs[method](arguments)
                 elif len(lst) == 5:
-                    arguments = f"{cls_name} {lst[2]} {lst[3]} {lst[4]}"
+                    arguments = f"'{cls_name}' '{lst[2]}' '{lst[3]}'\
+                        '{lst[4]}'"
                     dict_funcs[method](arguments)
                 else:
                     lst_to_dct = lst[3:]
