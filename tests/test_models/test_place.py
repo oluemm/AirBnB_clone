@@ -5,13 +5,16 @@ import unittest
 from models.base_model import BaseModel
 from models.place import Place
 
+
 class TestPlace(unittest.TestCase):
     """test case for place class"""
     def setUp(self):
         self.place = Place()
-        self.attr_list = ["name", "user_id", "city_id", "description",
-                "number_bathrooms", "max_guest", "number_rooms",
-                 "price_by_night", "latitude", "longitude", "amenity_ids"]
+        self.attr_list = [
+            "name", "user_id", "city_id", "description",
+            "number_bathrooms", "max_guest", "number_rooms",
+            "price_by_night", "latitude", "longitude",
+            "amenity_ids"]
 
     def test_place_subclass_of_basemodel(self):
         self.assertTrue(issubclass(type(self.place), BaseModel))
@@ -33,5 +36,5 @@ class TestPlace(unittest.TestCase):
         self.assertIs(type(self.place.longitude), float)
         self.assertIs(type(self.place.amenity_ids), list)
 
-        for attr in se;f.attr_list:
+        for attr in self.attr_list:
             self.assertFalse(bool(getattr(self.place, attr)))

@@ -200,26 +200,44 @@ class HBNBCommand(cmd.Cmd):
         * (hbnh) User.show("5f3f49e0-7499-4ef1-9558-5412e05c9333")
         * (hbnh) User.destroy("246c227a-d5c1-403d-9bc7-6a47bb9f0f68")
         """
-        parser_dict = {
+        dict_funcs = {
             "all": self.do_all,
             "count": self.do_count,
             "show": self.do_show,
-            "destroy": self.do_destroy
+            "destroy": self.do_destroy,
+            "update": self.do_update
         }
         lst = []
         line = line.replace("(", " ").replace(".", " ")\
-            .replace(")", "")
+            .replace(")", "").replace(",", " ").replace(":", "")\
+            .replace("{", " ").replace("}", " ").replace("  ", " ")
         lst = shlex.split(line)
         # print(lst)
         cls_name = lst[0]
-        method = lst[1]
-        if method in parser_dict:
-            if len(lst) == 2:
-                parser_dict[method](cls_name)
+        try:
+            method = lst[1]
+            if lst > 1 or method in dict_funcs:
+                if len(lst) == 2:
+                    dict_funcs[method](cls_name)
+                elif len(lst) == 3:
+                    arguments = f"{cls_name} {lst[2]}"
+                    # print(f"{method}({arguments})")
+                    dict_funcs[method](arguments)
+                elif len(lst) == 5:
+                    arguments = f"{cls_name} {lst[2]} {lst[3]} {lst[4]}"
+                    dict_funcs[method](arguments)
+                else:
+                    lst_to_dct = lst[3:]
+                    # using dict comprehension to get k & v pairs
+                    dic = {lst_to_dct[i]: lst_to_dct[i + 1] for i in
+                        range(0, len(lst_to_dct), 2)}
+                    for k, v in dic.items():
+                        arguments = f"{cls_name} {lst[2]} {k} {v}"
+                        dict_funcs[method](arguments)
             else:
-                arguments = f"{cls_name} {lst[2]}"
-                # print(f"{method}({arguments})")
-                parser_dict[method](arguments)
+                raise Exception()
+        except Exception:
+            print(f"*** Unknown syntax: {line}")
 
     def do_count(self, args: str):
         """

@@ -4,6 +4,9 @@
 		"created_at": "2022-11-25T20:15:06.184575",
 		"updated_at": "2022-11-25T20:15:06.184620",
 		"email": "gotohell.com",
+		"first_name": "John",
+		"age": "89",
+		"last_name": "Bull",
 		"__class__": "BaseModel"
 	},
 	"BaseModel.8346bddd-183c-4e82-ac9a-6ba5ca55c302": {
@@ -19,7 +22,7 @@
 		"created_at": "2022-11-26T11:07:22.846607",
 		"updated_at": "2022-11-26T11:07:22.846622",
 		"first_name": "Betty",
-		"last_name": "Bar",
+		"last_name": "Butter",
 		"email": "airbnb@mail.com",
 		"password": "root",
 		"__class__": "User"

@@ -5,6 +5,7 @@ import unittest
 from models.base_model import BaseModel
 from models.state import State
 
+
 class TestStat(unittest.TestCase):
     """test case for state class"""
 
