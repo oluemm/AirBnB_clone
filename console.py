@@ -221,7 +221,7 @@ class HBNBCommand(cmd.Cmd):
             .replace(")", "").replace(",", " ").replace(":", "")\
             .replace("{", " ").replace("}", " ").replace("  ", " ")
         lst = shlex.split(lst)
-        print(lst)
+        # print(lst)
         cls_name = lst[0]
         try:
             method = lst[1]
