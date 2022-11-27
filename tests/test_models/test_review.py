@@ -9,11 +9,10 @@ from models.review import Review
 class TestReview(unittest.TestCase):
     """test case for the review class"""
 
-    def setUp(self):
-        self.review = Review()
-        self.attr_list = [
+    review = Review()
+    attr_list = [
                 "place_id",
-                "user_is",
+                "user_id",
                 "text"
                 ]
 

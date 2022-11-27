@@ -17,21 +17,21 @@ class TestBaseModel(unittest.TestCase):
 
     def test_id(self):
         """
-        checks that instance has Id assigned on initialization
+        Checks that instance has Id assigned on initialization
         """
         x = BaseModel()
         self.assertTrue(hasattr(x, "id"))
 
     def test_str(self):
         """
-        checks if the string representation is appropriate
+        Checks if the string representation is appropriate
         """
         x = BaseModel()
         self.assertEqual(type(str(x)), str)
 
     def test_ids_unique(self):
         """
-        checks if the Ids genrated randomly are unique
+        Checks if the Ids genrated randomly are unique
         """
         x1 = BaseModel()
         x2 = BaseModel()
@@ -39,28 +39,28 @@ class TestBaseModel(unittest.TestCase):
 
     def test_ids_str(self):
         """
-        checks if the ID generated is str object
+        Checks if the ID generated is str object
         """
         x = BaseModel()
         self.assertTrue(type(x.id) is str)
 
     def test_created_at_datetime(self):
         """
-        cjecks that the attribute 'created_at" is a datetime
+        Checks that the attribute 'created_at" is a datetime
         """
         x = BaseModel()
         self.assertTrue(type(x.created_at) is datetime)
 
     def test_updated_at_datetime(self):
         """
-        checks that the attribute 'updtae_at' is datetime object
+        Checks that the attribute 'updtae_at' is datetime object
         """
         x = BaseModel()
         self.assertTrue(type(x.updated_at) is datetime)
 
     def test_created_at_different(self):
         """
-        checks the attribute 'created_at' of 2 models are different
+        Checks the attribute 'created_at' of 2 models are different
         """
 
         x1 = BaseModel()

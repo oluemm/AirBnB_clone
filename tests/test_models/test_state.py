@@ -6,11 +6,10 @@ from models.base_model import BaseModel
 from models.state import State
 
 
-class TestStat(unittest.TestCase):
+class TestState(unittest.TestCase):
     """test case for state class"""
 
-    def setUP(self):
-        self.state = State()
+    state = State()
 
     def test_state_subclass_of_basemodel(self):
         self.assertTrue(issubclass(type(self.state), BaseModel))
