@@ -17,3 +17,7 @@ class TestCity(unittest.TestCase):
     def test_class_attrs(self):
         for attr in self.attr_list:
             self.assertIs(type(self.city.name), str)
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -12,13 +12,11 @@ from models.place import Place
 from models.review import Review
 
 
+# dictionary of all class objects
 class_dict = {
-    "BaseModel": BaseModel,
-    "User": User,
-    "Amenity": Amenity,
-    "City": City,
-    "Place": Place,
-    "Review": Review
+    "BaseModel": BaseModel, "User": User,
+    "Amenity": Amenity, "City": City,
+    "Place": Place, "Review": Review
     }
 
 
@@ -93,9 +91,13 @@ class FileStorage():
                 loaded_dict = json.load(f)
                 # remember that we are working wit a nested dictionary
                 # each value is a dict on its own
+                # loop thru the dict keys
                 for key in loaded_dict.keys():
+                    # extract the class name of each instance object
                     class_name = loaded_dict[key]["__class__"]
+                    # load up a single instance
                     instance = loaded_dict[key]
+                    # add the instance to the private attrib __objects
                     cls.__objects[key] = class_dict[class_name](**instance)
         except Exception:
             pass

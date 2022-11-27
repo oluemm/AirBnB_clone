@@ -21,7 +21,8 @@ class BaseModel:
                 if k != "__class__":
                     if k in ("created_at", "updated_at"):
                         # Construct a date from the output of date.isoformat()
-                        # setattr(x, 'y', v) is equivalent to x.y = v''
+                        # setattr(x, 'y', v) is equivalent to x.y = v where;
+                        # x is dict_name, y is the key and v is the value
                         setattr(self, k, datetime.fromisoformat(v))
                     # otherwise create a key and value pair of other attributes
                     else:
@@ -29,9 +30,8 @@ class BaseModel:
 
     def __str__(self):
         """
-        #### Returns:
-            a customized string representation
-            `[<class name>] (<self.id>) <self.__dict__>`
+        #### Returns: `[<class name>] (<self.id>) <self.__dict__>`
+        A customized string representation
         """
         return f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
 
@@ -45,7 +45,7 @@ class BaseModel:
     def to_dict(self):
         """
         #### Returns:
-        a dictionary containing all keys/values of __dict__ of the instance:
+        A dictionary containing all keys/values of __dict__ of the instance:
         - only instance attributes set will be returned
         - a key __class__ is added with the class name of the object
         - created_at and updated_at must be converted to string object in ISO
@@ -58,10 +58,9 @@ class BaseModel:
             if k in ("created_at", "updated_at"):
                 # self.__dict__() returns a dict of
                 # instance attributes and values
-                # print("Here==>",self.__dict__)
                 # [k] simply sends in a key and gets it's
                 # value in our case, created_at or updated_at, then;
-                # converts datetime{2022-11-21 16:06:40.075755}
+                # converts datetime {2022-11-21 16:06:40.075755}
                 # to isoformat {2022-11-21T16:06:40.075755}
                 v = self.__dict__[k].isoformat()
                 dict_1[k] = v

@@ -20,18 +20,22 @@ class HBNBCommand(cmd.Cmd):
     class_lists = [i for i in class_dict.keys()]
 
     def do_quit(self, args):
-        """Quit command to exit the program console
+        """
+        Quit command to exit the program console
         """
         return True
 
     def do_EOF(self, args):
-        """Ctrl + D to exit the console gracefully
+        """
+        Ctrl + D to exit the console gracefully
         """
         print()
         return True
 
     def emptyline(self):
-        """Modify the empty line method to do nothing"""
+        """
+        Modify the empty line method to do nothing
+        """
         pass
 
     def do_create(self, args):
@@ -67,16 +71,22 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:  # check if no arg is passed
             print("** class name missing **")
             return
+        # 1st argument is class_name
+        # check if the class name is not a valid class
         elif args[0] not in class_dict.keys():
             print("** class doesn't exist **")
         elif len(args) < 2:  # check if id is missing
             print("** instance id missing **")
         else:
             class_name = args[0]
-            instance_id = args[1]
+            instance_id = args[1]  # 2nd argument is instance_id
+            # ciid stands for class instance id
+            # gotten from concatenation of class_name and instance
             ciid = f"{class_name}.{instance_id}"
+            # get all available instances saved
             all_instances = storage.all()
-            if ciid in all_instances:
+            if ciid in all_instances:  # if ciid exists
+                # save instance to a temporary variable show_ins
                 show_ins = all_instances[ciid]
                 # print(f"{class_name}[{instance_id}]")
                 print(show_ins)
@@ -92,7 +102,7 @@ class HBNBCommand(cmd.Cmd):
         >>> $ <class_name>.destroy(1234-1234-1234)
         """
         args = shlex.split(args)
-        # print(args)
+        # Similar processes to show.
         if len(args) == 0:  # check if no arg is passed
             print("** class name missing **")
             return
@@ -106,7 +116,9 @@ class HBNBCommand(cmd.Cmd):
             ciid = f"{class_name}.{instance_id}"
             all_instances = storage.all()
             if ciid in all_instances:
+                # delete the key and its value
                 del all_instances[ciid]
+                # save the instances object
                 storage.save()
             else:
                 print("** no instance found **")

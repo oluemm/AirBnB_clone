@@ -38,3 +38,7 @@ class TestPlace(unittest.TestCase):
 
         for attr in self.attr_list:
             self.assertFalse(bool(getattr(self.place, attr)))
+
+
+if __name__ == "__main__":
+    unittest.main()
