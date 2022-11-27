@@ -234,7 +234,7 @@ class HBNBCommand(cmd.Cmd):
                     lst_to_dct = lst[3:]
                     # using dict comprehension to get k & v pairs
                     dic = {lst_to_dct[i]: lst_to_dct[i + 1] for i in
-                        range(0, len(lst_to_dct), 2)}
+                           range(0, len(lst_to_dct), 2)}
                     for k, v in dic.items():
                         arguments = f"{cls_name} {lst[2]} {k} {v}"
                         dict_funcs[method](arguments)
