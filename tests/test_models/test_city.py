@@ -13,7 +13,7 @@ class TestCity(unittest.TestCase):
         self.city = City()
         self.attr_list = ["state_id", "name"]
 
-    def test_subclass_of_basemodel(self):
+    def test_city_subclass_of_basemodel(self):
         self.assertTrue(issubclass(type(self.city), BaseModel))
 
     def test_class_attrs(self):
