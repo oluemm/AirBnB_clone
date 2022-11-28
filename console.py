@@ -143,9 +143,15 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             class_name = args[0]
-            for instances in all_instances.keys():
-                if str(instances).startswith(class_name):
-                    my_list.append(str(all_instances[instances]))
+            # using list comprehension instead
+            my_list = [
+                str(all_instances[instances])  # get keys as instances
+                for instances in all_instances.keys()
+                if class_name in instances  # chk if class_name exist
+                ]
+            # for instances in all_instances.keys():
+            #     if str(instances).startswith(class_name):
+            #         my_list.append(str(all_instances[instances]))
             print(my_list)
 
     def do_update(self, args):
