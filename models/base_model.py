@@ -3,18 +3,18 @@
 
 from uuid import uuid4
 from datetime import datetime
-import models
 
 class BaseModel:
     """A class that defines common method and attributes for other clases"""
 
     def __init__(self, *args, **kwargs):
         """Initialize the base model"""
+        from models import storage
         if not kwargs:  # if no dictionary (key&value) argument is passed
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            models.storage.new(self)
+            storage.new(self)
         else:
             self.__set_from_dict(**kwargs)
 
@@ -27,8 +27,9 @@ class BaseModel:
 
     def save(self):
         """Updates 'self.updated_at' with the current datetime"""
+        from models import storage
         self.updated_at = datetime.now()
-        models.storage.save()
+        storage.save()
 
     def to_dict(self):
         """
