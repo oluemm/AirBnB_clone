@@ -267,16 +267,17 @@ class HBNBCommand(cmd.Cmd):
         {'first_name': "John", "age": 89})
         """
         dict_funcs = {
-            "all": self.do_all,
-            "count": self.do_count,
-            "show": self.do_show,
-            "destroy": self.do_destroy,
-            "update": self.do_update,
-            "create": self.do_create
+            "all()": self.do_all,
+            "count()": self.do_count,
+            "show()": self.do_show,
+            "destroy()": self.do_destroy,
+            "update()": self.do_update,
+            "create()": self.do_create
         }
-        lst = line.replace("(", " ").replace(".", " ")\
-            .replace(")", "").replace(",", " ").replace(":", " ")\
-            .replace("{", " ").replace("}", " ").replace("  ", " ")
+        lst = line.replace(")", "").replace("(", "() ")\
+            .replace(".", " ").replace(",", " ")\
+                .replace(":", " ").replace("{", " ")\
+                    .replace("}", " ").replace("  ", " ")
         lst = split(lst)
         # print(lst, "\n")
         cls_name = lst[0]
