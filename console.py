@@ -98,6 +98,8 @@ class HBNBCommand(cmd.Cmd):
         `Example:`$ <class_name>.create()
         """
         args = check_args(args)
+        if not args:
+            return
         # evaluate the class_arg & create a new instance
         new_instance = eval(args[0])()
         new_instance.save()
