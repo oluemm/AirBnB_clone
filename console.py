@@ -57,10 +57,10 @@ def check_args(args):
 
     if len(arg_list) == 0:
         print("** class name missing **")
-        return
+        return False
     elif arg_list[0] not in class_dict.keys():
         print("** class doesn't exist **")
-        return
+        return False
     else:
         return arg_list
 
@@ -219,21 +219,21 @@ class HBNBCommand(cmd.Cmd):
             ciid = f"{class_name}.{id}"
         except Exception:
             print("** instance id missing **")
-            return
+            return False
         try:
             attribute_name = args[2]
         except Exception:
             print("** attribute name missing **")
-            return
+            return False
         try:
             attribute_val = args[3]
         except Exception:
             print("** value missing **")
-            return
+            return False
 
         if ciid not in my_instances.keys():
             print("** no instance found **")
-            return
+            return False
         update_dict = {}  # initialize empty dict
         #  loop thru loaded instance's key & value pairs
         for k, v in my_instances.items():
@@ -288,7 +288,7 @@ class HBNBCommand(cmd.Cmd):
             method = lst[1]
         except IndexError:
             print(f"*** Unknown syntax: {line}")
-            return
+            return False
 
         if method in dict_funcs:
             method = lst[1]
@@ -310,7 +310,7 @@ class HBNBCommand(cmd.Cmd):
                     # print(dic)
                 except IndexError:
                     print("** value missing **")
-                    return
+                    return False
                 for k, v in dic.items():
                     arguments = f"{cls_name} {lst[2]} {k} {v}"
                     dict_funcs[method](arguments)
@@ -336,7 +336,7 @@ class HBNBCommand(cmd.Cmd):
         """
         args = check_args(args)
         if not args:
-            return
+            return False
         all_instances = storage.all()
         my_list = []
         class_name = args[0]

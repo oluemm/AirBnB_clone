@@ -18,5 +18,15 @@
 		"email": "airbnb@mail.com",
 		"password": "root",
 		"__class__": "User"
+	},
+	"User.bcaa0728-db13-4c01-b234-7e14487aac93": {
+		"id": "bcaa0728-db13-4c01-b234-7e14487aac93",
+		"created_at": "2022-11-28T20:03:12.987060",
+		"updated_at": "2022-11-28T20:03:12.987073",
+		"first_name": "Betty",
+		"last_name": "Bar",
+		"email": "airbnb@mail.com",
+		"password": "root",
+		"__class__": "User"
 	}
 }
