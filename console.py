@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """Contains the entry point of the command interpreter"""
 import cmd
-import shlex
+import re
+from shlex import split
 from models.base_model import BaseModel
 from models.user import User
 from models.amenity import Amenity
@@ -10,6 +11,53 @@ from models.place import Place
 from models import class_dict
 from models import storage
 
+def parse(arg):
+    """Parse the command line arguments"""
+    # search for strings that contain curly_braces
+    curly_braces = re.search(r"\{(.*?)\}", arg)
+    # search for strings that contain brackets
+    brackets = re.search(r"\[(.*?)\]", arg)
+    if curly_braces is None:  # no curly_braces
+        if brackets is None:  # no brackets
+            # simply split the string
+            return [i.strip(",") for i in split(arg)]
+        else:  # if brackets
+            # slice the str of args at the index whr
+            # the brackets starts.
+            start_idx = brackets.span()[0]
+            lexer = split(arg[:start_idx])
+            # remove all commas from each items
+            retl = [i.strip(",") for i in lexer]
+            # append the arguments in brackets
+            retl.append(brackets.group())
+            return retl
+    else:  # if curly_braces
+            # slice the str of args at the index whr
+            # the curly_braces starts
+        start_idx = curly_braces.span()[0]
+        lexer = split(arg[:start_idx])
+        # remove all commas from each items
+        retl = [i.strip(",") for i in lexer]
+        # append the arguments in curly_braces
+        retl.append(curly_braces.group())
+        return retl
+
+
+def check_args(args):
+    """Checks if args is valid
+    Args:
+        args (str): the string containing the arguments passed to a command
+    Returns:
+        Error message if args is None or not a valid class, else the arguments
+    """
+    arg_list = parse(args)
+
+    if len(arg_list) == 0:
+        print("** class name missing **")
+    elif arg_list[0] not in class_dict.keys():
+        print("** class doesn't exist **")
+    else:
+        return arg_list
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -45,18 +93,11 @@ class HBNBCommand(cmd.Cmd):
         `Example:`$ create BaseModel
         `Example:`$ <class_name>.create()
         """
-        if len(args) == 0:  # check if no arg is passed
-            print("** class name missing **")
-            return
-        try:
-            args = shlex.split(args)
-            # evaluate the class_arg & create a new instance
-            new_instance = eval(args[0])()
-            new_instance.save()
-            print(new_instance.id)
-
-        except Exception:    # if class doesn't exist
-            print("** class doesn't exist **")
+        args = check_args(args)
+        # evaluate the class_arg & create a new instance
+        new_instance = eval(args[0])()
+        new_instance.save()
+        print(new_instance.id)
 
     def do_show(self, args):
         """
@@ -66,16 +107,8 @@ class HBNBCommand(cmd.Cmd):
         >>> $ show BaseModel 1234-1234-1234.
         >>> $ <class_name>.show(1234-1234-1234)
         """
-        args = shlex.split(args)
-        # print(args)
-        if len(args) == 0:  # check if no arg is passed
-            print("** class name missing **")
-            return
-        # 1st argument is class_name
-        # check if the class name is not a valid class
-        elif args[0] not in class_dict.keys():
-            print("** class doesn't exist **")
-        elif len(args) < 2:  # check if id is missing
+        args = check_args(args)
+        if len(args) < 2:  # check if id is missing
             print("** instance id missing **")
         else:
             class_name = args[0]
@@ -101,14 +134,8 @@ class HBNBCommand(cmd.Cmd):
         >>> $ destroy BaseModel 1234-1234-1234
         >>> $ <class_name>.destroy(1234-1234-1234)
         """
-        args = shlex.split(args)
-        # Similar processes to show.
-        if len(args) == 0:  # check if no arg is passed
-            print("** class name missing **")
-            return
-        elif args[0] not in class_dict.keys():
-            print("** class doesn't exist **")
-        elif len(args) < 2:  # check if id is missing
+        args = check_args(args)
+        if len(args) < 2:  # check if id is missing
             print("** instance id missing **")
         else:
             class_name = args[0]
@@ -132,7 +159,7 @@ class HBNBCommand(cmd.Cmd):
         >>> $ all BaseModel
         >>> $ <class_name>.all()
         """
-        args = shlex.split(args)
+        args = check_args(args)
         all_instances = storage.all()
         my_list = []
         if len(args) == 0:  # check if no arg is passed
@@ -164,15 +191,15 @@ class HBNBCommand(cmd.Cmd):
         Usage: update <class name> <id> <attribute name> '<attribute value>'
         >>> $ <class_name>.update(<id> <attribute name> '<attribute value>')
         """
-        args = shlex.split(args)
+        args = check_args(args)
         my_instances = storage.all()
-        try:
-            class_name = args[0]
-            if class_name not in class_dict.keys():
-                print("** class doesn't exist **")
-        except Exception:
-            print("** class name missing **")
-            return
+        class_name = args[0]
+        # try:
+        #     if class_name not in class_dict.keys():
+        #         print("** class doesn't exist **")
+        # except Exception:
+        #     print("** class name missing **")
+        #     return
         try:
             id = args[1]
             ciid = f"{class_name}.{id}"
@@ -239,7 +266,7 @@ class HBNBCommand(cmd.Cmd):
         lst = line.replace("(", " ").replace(".", " ")\
             .replace(")", "").replace(",", " ").replace(":", "")\
             .replace("{", " ").replace("}", " ").replace("  ", " ")
-        lst = shlex.split(lst)
+        lst = split(lst)
         # print(lst)
         cls_name = lst[0]
         try:
@@ -279,20 +306,14 @@ class HBNBCommand(cmd.Cmd):
         * BaseModel.count()
         * count User
         """
-        args = shlex.split(args)
+        args = check_args(args)
         all_instances = storage.all()
         my_list = []
-        if len(args) < 1:
-            print("** class name missing **")
-            return
-        if args[0] not in class_dict.keys():
-            print("** class doesn't exist **")
-        else:
-            class_name = args[0]
-            for instances in all_instances.keys():
-                if str(instances).startswith(class_name):
-                    my_list.append(str(all_instances[instances]))
-            print(len(my_list))
+        class_name = args[0]
+        for instances in all_instances.keys():
+            if str(instances).startswith(class_name):
+                my_list.append(str(all_instances[instances]))
+        print(len(my_list))
 # ===================================================================
 # ====================== Auto Completions Functions =================
 # ===================================================================
@@ -342,18 +363,6 @@ class HBNBCommand(cmd.Cmd):
                 if f.startswith(text)
                 ]
         return completions
-
-    def help_update(self):
-        text = """
-        Updates an instance based on the class name
-        and id by adding or updating attribute (save the
-        change into the JSON file).
-        Example:
-        >>> $ update BaseModel 1234-1234-1234 email "aibnb@mail. com".
-        Usage: update <class name> <id> <attribute name> '<attribute value>'
-        >>> $ <class_name>.update(<id> <attribute name> '<attribute value>')
-            """
-        print(text)
 
 
 if __name__ == "__main__":
