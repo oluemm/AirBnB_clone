@@ -8,6 +8,8 @@ from models.user import User
 from models.amenity import Amenity
 from models.city import City
 from models.place import Place
+from models.state import State
+from models.review import Review
 from models import class_dict
 from models import storage
 
@@ -54,8 +56,10 @@ def check_args(args):
 
     if len(arg_list) == 0:
         print("** class name missing **")
+        return
     elif arg_list[0] not in class_dict.keys():
         print("** class doesn't exist **")
+        return
     else:
         return arg_list
 
@@ -108,6 +112,8 @@ class HBNBCommand(cmd.Cmd):
         >>> $ <class_name>.show(1234-1234-1234)
         """
         args = check_args(args)
+        if not args:
+            return
         if len(args) < 2:  # check if id is missing
             print("** instance id missing **")
         else:
@@ -135,6 +141,8 @@ class HBNBCommand(cmd.Cmd):
         >>> $ <class_name>.destroy(1234-1234-1234)
         """
         args = check_args(args)
+        if not args:
+            return
         if len(args) < 2:  # check if id is missing
             print("** instance id missing **")
         else:
@@ -159,26 +167,23 @@ class HBNBCommand(cmd.Cmd):
         >>> $ all BaseModel
         >>> $ <class_name>.all()
         """
-        args = check_args(args)
+        args = split(args)
         all_instances = storage.all()
         my_list = []
         if len(args) == 0:  # check if no arg is passed
-            for instances in all_instances:
-                my_list.append(str(all_instances[instances]))
+            my_list= [
+                str(all_instances[instances])
+                for instances in all_instances.keys()
+                ]
+                # my_list.append(str(all_instances[instances]))
             print(my_list)
         elif args[0] not in class_dict.keys():
             print("** class doesn't exist **")
         else:
             class_name = args[0]
-            # using list comprehension instead
-            my_list = [
-                str(all_instances[instances])  # get keys as instances
-                for instances in all_instances.keys()
-                if class_name in instances  # chk if class_name exist
-                ]
-            # for instances in all_instances.keys():
-            #     if str(instances).startswith(class_name):
-            #         my_list.append(str(all_instances[instances]))
+            for instances in all_instances.keys():
+                if str(instances).startswith(class_name):
+                    my_list.append(str(all_instances[instances]))
             print(my_list)
 
     def do_update(self, args):
@@ -188,11 +193,17 @@ class HBNBCommand(cmd.Cmd):
         JSON file).
         `Example:`
         >>> $ update BaseModel 1234-1234-1234 email "aibnb@mail. com".
-        Usage: update <class name> <id> <attribute name> '<attribute value>'
+
+        >>> update <class name> <id> <attribute name> '<attribute value>'
+
         >>> $ <class_name>.update(<id> <attribute name> '<attribute value>')
+
+        >>> <class name>.update(<id>, <dictionary representation>)
         """
         args = check_args(args)
         my_instances = storage.all()
+        if not args:
+            return
         class_name = args[0]
         # try:
         #     if class_name not in class_dict.keys():
@@ -203,9 +214,6 @@ class HBNBCommand(cmd.Cmd):
         try:
             id = args[1]
             ciid = f"{class_name}.{id}"
-            if ciid not in my_instances.keys():
-                print("** no instance found **")
-                return
         except Exception:
             print("** instance id missing **")
             return
@@ -220,6 +228,9 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
             return
 
+        if ciid not in my_instances.keys():
+            print("** no instance found **")
+            return
         update_dict = {}  # initialize empty dict
         #  loop thru loaded instance's key & value pairs
         for k, v in my_instances.items():
@@ -264,35 +275,48 @@ class HBNBCommand(cmd.Cmd):
             "create": self.do_create
         }
         lst = line.replace("(", " ").replace(".", " ")\
-            .replace(")", "").replace(",", " ").replace(":", "")\
+            .replace(")", "").replace(",", " ").replace(":", " ")\
             .replace("{", " ").replace("}", " ").replace("  ", " ")
         lst = split(lst)
-        # print(lst)
+        # print(lst, "\n")
         cls_name = lst[0]
         try:
             method = lst[1]
-            if method in dict_funcs:
-                if len(lst) == 2:
-                    dict_funcs[method](cls_name)
-                elif len(lst) == 3:
-                    arguments = f"'{cls_name}' '{lst[2]}'"
-                    # print(f"{method}({arguments})")
+        except IndexError:
+            print(f"*** Unknown syntax: {line}")
+            return
+
+        if method in dict_funcs:
+            method = lst[1]
+            if len(lst) == 2:
+                dict_funcs[method](cls_name)
+            elif len(lst) == 3:
+                arguments = f"'{cls_name}' '{lst[2]}'"
+                # print(f"{method}({arguments})")
+                dict_funcs[method](arguments)
+            elif len(lst) >= 4 and len(lst[3:]) % 2 == 0:
+                lst_to_dct = lst[3:]
+                # print(lst_to_dct)
+                # using dict comprehension to get k & v pairs
+                try:
+                    dic = {
+                        lst_to_dct[i]: lst_to_dct[i + 1]
+                        for i in range(0, len(lst_to_dct), 2)
+                        }
+                    # print(dic)
+                except IndexError:
+                    print("** value missing **")
+                    return
+                for k, v in dic.items():
+                    arguments = f"{cls_name} {lst[2]} {k} {v}"
                     dict_funcs[method](arguments)
-                elif len(lst) == 5:
-                    arguments = f"'{cls_name}' '{lst[2]}' '{lst[3]}'\
-                        '{lst[4]}'"
-                    dict_funcs[method](arguments)
-                else:
-                    lst_to_dct = lst[3:]
-                    # using dict comprehension to get k & v pairs
-                    dic = {lst_to_dct[i]: lst_to_dct[i + 1] for i in
-                           range(0, len(lst_to_dct), 2)}
-                    for k, v in dic.items():
-                        arguments = f"{cls_name} {lst[2]} {k} {v}"
-                        dict_funcs[method](arguments)
             else:
-                raise Exception()
-        except Exception:
+                rem = " ".join(str(i) for i in lst[2:])
+                # print(rem)
+                arguments = f"'{cls_name}' {rem}"
+                # '{lst[3]}' '{lst[4]}'"
+                dict_funcs[method](arguments)
+        else:
             print(f"*** Unknown syntax: {line}")
 
     def do_count(self, args: str):
@@ -307,6 +331,8 @@ class HBNBCommand(cmd.Cmd):
         * count User
         """
         args = check_args(args)
+        if not args:
+            return
         all_instances = storage.all()
         my_list = []
         class_name = args[0]
