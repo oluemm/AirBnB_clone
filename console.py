@@ -13,6 +13,7 @@ from models.review import Review
 from models import class_dict
 from models import storage
 
+
 def parse(arg):
     """Parse the command line arguments"""
     # search for strings that contain curly_braces
@@ -34,8 +35,8 @@ def parse(arg):
             retl.append(brackets.group())
             return retl
     else:  # if curly_braces
-            # slice the str of args at the index whr
-            # the curly_braces starts
+        # slice the str of args at the index whr
+        # the curly_braces starts
         start_idx = curly_braces.span()[0]
         lexer = split(arg[:start_idx])
         # remove all commas from each items
@@ -62,6 +63,7 @@ def check_args(args):
         return
     else:
         return arg_list
+
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -173,11 +175,10 @@ class HBNBCommand(cmd.Cmd):
         all_instances = storage.all()
         my_list = []
         if len(args) == 0:  # check if no arg is passed
-            my_list= [
+            my_list = [
                 str(all_instances[instances])
                 for instances in all_instances.keys()
                 ]
-                # my_list.append(str(all_instances[instances]))
             print(my_list)
         elif args[0] not in class_dict.keys():
             print("** class doesn't exist **")
@@ -278,8 +279,8 @@ class HBNBCommand(cmd.Cmd):
         }
         lst = line.replace(")", "").replace("(", "() ")\
             .replace(".", " ").replace(",", " ")\
-                .replace(":", " ").replace("{", " ")\
-                    .replace("}", " ").replace("  ", " ")
+            .replace(":", " ").replace("{", " ")\
+            .replace("}", " ").replace("  ", " ")
         lst = split(lst)
         # print(lst, "\n")
         cls_name = lst[0]
