@@ -5,3 +5,4 @@ venv
 .*.swp
 */*/.*.swp
 .ipynb_checkpoints
+main.py

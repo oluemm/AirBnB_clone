@@ -10,13 +10,17 @@ from models.amenity import Amenity
 from models.city import City
 from models.place import Place
 from models.review import Review
-
+from models.state import State
 
 # dictionary of all class objects
 class_dict = {
-    "BaseModel": BaseModel, "User": User,
-    "Amenity": Amenity, "City": City,
-    "Place": Place, "Review": Review
+    "BaseModel": BaseModel,
+    "User": User,
+    "Amenity": Amenity,
+    "City": City,
+    "Place": Place,
+    "Review": Review,
+    "State": State
     }
 
 
