@@ -1,15 +1,8 @@
 /* Header Styles */
 header{
-	background-color: white;
+	/* import our logo as background image */
+	background:white url('../images/logo.png') 20px no-repeat;
 	height: 70px;
 	width: 100%;
 	border-bottom: 1px solid #CCCCCC;
-}
-.logo {
-	/* import our logo as background image */
-	background-image: url('../images/logo.png');
-	margin-left: 20px; /* 20px space at the left */
-	height: 60px; /* gotten from logo height */
-	width: 142px; /* gotten from logo width */
-	border-bottom: none;
 }
