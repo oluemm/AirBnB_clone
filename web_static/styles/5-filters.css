@@ -1,0 +1,45 @@
+
+/* Filters style */
+.filters {
+	background-color: white;
+	height: 70px;
+	width: 100%;
+	border: 1px solid #DDDDDD;
+	border-radius: 4px;
+	display: flex; /*controls hw to display the filter elements*/
+	align-items: center;
+}
+/* Search button style */
+button {
+	background: #FF5A5F; /*butto color*/
+	border: none;
+	border-radius: 4px; /* border radius: 4px*/
+	color: #FFFFFF; /*text color*/
+	float: right; /*position*/
+	font-size: 18px;
+	height: 48px;
+	margin-left: auto;
+	margin-right: 30px; /*30px of the right border*/
+	width: 20%;
+}
+.locations {
+	border-right: 1px solid #DDDDDD;
+}
+.amenities, .locations{
+	height: 100%;
+	width: 25%;
+}
+h3{
+	font-weight: 600;
+	margin: 15px 40px 2px; /*top 15px, right & left 40px, bottom 2px*/
+}
+h4{
+	font-weight: 400;
+	font-size: 14px;
+	margin: 0px 40px; /*top & bottom 0px, right & left 40px*/
+}
+/* Search button hover opacity */
+button:hover {
+	/*change opacity to 90% when the mouse is on the button*/
+	opacity: 0.9;
+}
