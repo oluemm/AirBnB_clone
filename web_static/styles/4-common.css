@@ -1,6 +1,4 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 2. v2.0 | 20110126
-	License: none (public domain)
-*/
+/* =====RESET===== */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -45,15 +43,18 @@ table {
 	border-spacing: 0;
 }
 
+/*=====GLOBAL STYLE=====*/
 body {
 	color: #484848;
 	font-size: 14px;
 	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
-	margin: 0;
-	padding: 0;
 }
 .container {
 	max-width: 1000px;
-	margin: 30px 0px;
-	text-align: center;
+	/*top & bottom 30px left & right auto*/
+	margin: 30px auto;
+}
+/* Strong style */
+strong {
+	font-weight: bold;
 }
