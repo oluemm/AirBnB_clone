@@ -1,7 +1,7 @@
 /* Places flexbox */
 .places {
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: wrap;
 	justify-content: center;
 	width: 100%;
 }
@@ -133,14 +133,21 @@ margin-bottom: 6px;
 margin-top: 20px;
 }
 .tv_icon {
-	background: url(../images/icon.png) no-repeat center;
+	background: url(../images/logo.png) no-repeat center;
+	list-style: none;
+	width: 100%;
+	height: 100%;
+	line-height: 50px;
+	/* background-image: url(../images/icon_tv.png); */
+	background-repeat: no-repeat;
+	background-position: -2% -3px;
+	background-size: 25%;
 }
 .pets_icon{
 	background: url(../images/icon.png) no-repeat center;
+	background-position: 50% 5px;
 }
 .wifi_icon{
 	background: url(../images/icon.png) no-repeat center;
-	display: flex;
-	position: relative;
-	left: auto;
+	background-position: 50% 5px;
 }
