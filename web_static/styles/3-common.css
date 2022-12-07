@@ -1,1 +1,8 @@
+/* Reset all default sttyling */
+@import url("reset_all.css");
 
+/*=== === Global style === ===*/
+body {
+	font: 14px Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #484848;
+}
