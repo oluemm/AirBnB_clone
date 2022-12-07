@@ -1,5 +1,6 @@
+/*=== === Header style === ===*/
 header {
-	background: #f00;
+	background: #f00; /*same as #FF0000*/
 	height: 70px;
 	width: 100%;
 }
