@@ -1,8 +1,1 @@
-/* Including one css file into other */
-/* @import "2-header.css";
-@import "2-footer.css"; */
-/*Although the above method works, but in cases where we need only the common i.e. body, with a different header and footer style, we'd need to make changes again*/
-body {
-	margin:0;
-	padding:0;
-}
+
