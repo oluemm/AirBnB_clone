@@ -50,7 +50,7 @@
 .amenities h4 {
 	height: 50%;
 	font-weight: 400;
-	padding: 6px 0 0px 30px;
+	padding: 6px 0px 0px 30px;
 }
 /*===== On-Hover Dropdowns =====*/
 .popover {
@@ -59,6 +59,8 @@
 	border-radius: 4px;
 	display: none;
 	position: absolute;
+	/* padding: 10px; */
+	margin-top: -2.5%;
 	width: 100%;
 }
 .filters .locations:hover .popover {
