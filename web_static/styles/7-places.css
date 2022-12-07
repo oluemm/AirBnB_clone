@@ -1,0 +1,32 @@
+/*=== Places Class ===*/
+
+/*===== Places style =====*/
+.places {
+	background-color: white;
+}
+
+/*===== Places h1 tag =====*/
+.places h1 {
+	width: 100%;
+	font-size: 30px;
+	margin-top: 0.83em;
+	margin-bottom: 0.83em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
+/*===== Places article style =====*/
+.places article {
+	border: 1px solid #ff5a5f;
+	border-radius: 4px;
+	display: inline-block;
+	margin: 20px;
+	padding: 20px;
+	width: 390px;
+}
+/*===== Places article h2 tag =====*/
+.places h2 {
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+}
