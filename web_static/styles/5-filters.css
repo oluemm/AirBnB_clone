@@ -1,1 +1,53 @@
+/*=== Filters Class ===*/
 
+/*===== Filters style =====*/
+.filters {
+	background-color: white;
+	height: 70px;
+	width: 100%;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+/*===== Search button style =====*/
+.filters button {
+	font-size: 18px;
+	background: #ff5a5f;
+	color: #fff;
+	height: 48px;
+	width: 20%;
+	border: 0;
+	border-radius: 4px;
+	margin: 12px 30px;
+	float: right;
+}
+/*===== Search button hover opacity =====*/
+.filters button:hover {
+	opacity: 90%;
+}
+
+/*===== Locations and Amenities Filters =====*/
+.locations,
+.amenities {
+	height: 100%;
+	width: 25%;
+	display: inline-block;
+}
+.locations {
+	border-right: 1px solid #ddd;
+}
+/*== Title ==*/
+.locations h3,
+.amenities h3 {
+	/*Since I decided to reset all tags, I've to reassign default h3 font-size back*/
+	font-size: 18.72px;
+	font-weight: 600;
+	padding: 15px 0 0 30px;
+}
+/*== Subtitle ==*/
+.locations h4,
+.amenities h4 {
+	height: 50%;
+	font-weight: 400;
+	padding: 4.5px 0 12px 30px;
+}
