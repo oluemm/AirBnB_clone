@@ -1,1 +1,238 @@
+/*=== Places Class ===*/
 
+/*===== Places style =====*/
+.places {
+	background-color: white;
+	/*Improve the Places section by using Flexible boxes
+	for all Place articles*/
+	display: flex;
+	/*shorthand for flex-dir.==row and flex-wrap==wrap*/
+	flex-flow: row wrap;
+	justify-content: center;
+	width: 100%;
+}
+
+/*===== Places h1 tag =====*/
+.places h1 {
+	width: 100%;
+	font-size: 30px;
+	margin-top: 0.83em;
+	margin-bottom: 0.83em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
+/*===== Places article style =====*/
+.places article {
+	border: 1px solid #ff5a5f;
+	border-radius: 4px;
+	margin: 20px;
+	padding: 20px;
+	width: 390px;
+}
+/*===== Places article h2 tag =====*/
+.places h2 {
+	font-size: 30px;
+	font-weight: bold;
+	/*Using margin to centralized header*/
+	margin: 0 auto;
+}
+
+/*=== Article price by night ===*/
+/*===== Article name header and price style =====*/
+.places .name_and_price {
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+/*===== Price by night circle =====*/
+.places .price_by_night {
+	align-items: center;
+	border: 4px solid #ff5a5f;
+	border-radius: 50%;
+	color: #ff5a5f;
+	display: flex;
+	font-size: 30px;
+	height: 60px;
+	justify-content: center;
+	min-width: 60px;
+}
+/*===== Update footer to fit new designs ====*/
+footer {
+	position: relative;
+}
+
+/*=== Information Class ===*/
+/*====Guests==rooms==and==bathrooms====*/
+.places .information {
+	align-items: center;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	display: flex;
+	flex-direction: row;
+	height: 80px;
+	justify-content: space-around;
+	text-align: center;
+}
+/*==== Information Max Guest Class====*/
+.information .max_guest {
+	background-image: url("../images/icon_group.png");
+	filter: contrast(800%);
+	background-position: 20px center;
+	background-repeat: no-repeat;
+	width: 100px;
+	height: 40px;
+}
+.information .max_guest p {
+	position: relative;
+	line-height: 100px;
+}
+/*==== Information Number of Rooms Class====*/
+.information .number_rooms {
+	background-image: url("../images/icon_bed.png");
+	filter: contrast(800%);
+	background-position: 20px center;
+	background-repeat: no-repeat;
+	width: 100px;
+	height: 40px;
+}
+.information .number_rooms p {
+	position: relative;
+	line-height: 100px;
+}
+/*==== Information Number of Bathrooms Class====*/
+.information .number_bathrooms {
+	background-image: url("../images/icon_bath.png");
+	filter: contrast(800%);
+	background-position: 20px center;
+	background-repeat: no-repeat;
+	width: 100px;
+	height: 40px;
+}
+.information .number_bathrooms p {
+	position: relative;
+	line-height: 100px;
+}
+/*====Padding around owner====*/
+.places .user {
+	margin: 20px auto 20px auto;
+}
+
+.places .description {
+	font-weight: normal;
+	display: flex;
+}
+/*=====List of Amenities=====*/
+.places .amenities {
+	margin-top: 40px;
+	height: auto;
+	width: 100%;
+}
+.places .amenities h2,
+.places .reviews h2 {
+	text-align: left;
+	font-size: 16px;
+	padding-bottom: 0.425em;
+	border-bottom: 1px solid #ddd;
+}
+/*=====Amenity Icons=====*/
+.places .amenities .tv {
+	background-image: url("../images/icon_tv.png");
+	background-position: 20px left;
+	background-repeat: no-repeat;
+	height: 30px;
+	width: 30px;
+	background-size: 80% 80%;
+	filter: contrast(400%);
+}
+.places .amenities .pets {
+	background-image: url("../images/icon_pets.png");
+	background-position: 20px left;
+	background-repeat: no-repeat;
+	height: 30px;
+	width: 30px;
+	background-size: 80% 80%;
+	filter: contrast(400%);
+}
+.places .amenities .wifi {
+	background-image: url("../images/icon_wifi.png");
+	background-position: 20px left;
+	background-repeat: no-repeat;
+	height: 30px;
+	width: 30px;
+	background-size: 80% 80%;
+	filter: contrast(400%);
+}
+.places .amenities .janitor {
+	background-image: url("../images/icons8-janitor-50.png");
+	background-position: 20px left;
+	background-repeat: no-repeat;
+	height: 30px;
+	width: 30px;
+	background-size: 80% 80%;
+	filter: contrast(400%);
+}
+.places .amenities .smart_home {
+	background-image: url("../images/icons8-smart-home-50.png");
+	background-position: 20px left;
+	background-repeat: no-repeat;
+	height: 30px;
+	width: 30px;
+	background-size: 80% 80%;
+	filter: contrast(400%);
+}
+.places .amenities .pool {
+	background-image: url("../images/swimming.png");
+	background-position: 20px left;
+	background-repeat: no-repeat;
+	height: 30px;
+	width: 30px;
+	background-size: 80% 80%;
+	filter: contrast(400%);
+}
+.places .amenities .football {
+	background-image: url("../images/football.png");
+	background-position: 20px left;
+	background-repeat: no-repeat;
+	height: 30px;
+	width: 30px;
+	background-size: 80% 80%;
+	filter: contrast(400%);
+}
+.places .amenities .saloon {
+	background-image: url("../images/hair-dryer.png");
+	background-position: 20px left;
+	background-repeat: no-repeat;
+	height: 30px;
+	width: 30px;
+	background-size: 80% 80%;
+	filter: contrast(400%);
+}
+.places .amenities li {
+	display: block;
+	margin: 20px 0px 10px 0;
+	line-height: 30px;
+}
+.places .amenities p {
+	width: max-content;
+	font-size: 16px;
+	margin-left: 50px;
+}
+/*=====Reviews Section=====*/
+.places .reviews {
+	margin-top: 40px;
+}
+.places .reviews h3 {
+	margin-top: 10px;
+	font-size: 14px;
+	font-weight: 600;
+}
+.places .reviews p {
+	font-size: 12px;
+}
+/*=====Redifining Strong=====*/
+strong {
+	font-weight: bold;
+}
