@@ -76,6 +76,7 @@ footer {
 /*==== Information Max Guest Class====*/
 .information .max_guest {
 	background-image: url("../images/icon_group.png");
+	filter: contrast(800%);
 	background-position: 20px center;
 	background-repeat: no-repeat;
 	width: 100px;
@@ -88,6 +89,7 @@ footer {
 /*==== Information Number of Rooms Class====*/
 .information .number_rooms {
 	background-image: url("../images/icon_bed.png");
+	filter: contrast(800%);
 	background-position: 20px center;
 	background-repeat: no-repeat;
 	width: 100px;
@@ -100,6 +102,7 @@ footer {
 /*==== Information Number of Bathrooms Class====*/
 .information .number_bathrooms {
 	background-image: url("../images/icon_bath.png");
+	filter: contrast(800%);
 	background-position: 20px center;
 	background-repeat: no-repeat;
 	width: 100px;
@@ -139,6 +142,7 @@ footer {
 	height: 30px;
 	width: 30px;
 	background-size: 80% 80%;
+	filter: contrast(400%);
 }
 .places .amenities .pets {
 	background-image: url("../images/icon_pets.png");
@@ -147,6 +151,7 @@ footer {
 	height: 30px;
 	width: 30px;
 	background-size: 80% 80%;
+	filter: contrast(400%);
 }
 .places .amenities .wifi {
 	background-image: url("../images/icon_wifi.png");
@@ -155,6 +160,7 @@ footer {
 	height: 30px;
 	width: 30px;
 	background-size: 80% 80%;
+	filter: contrast(400%);
 }
 .places .amenities .janitor {
 	background-image: url("../images/icons8-janitor-50.png");
@@ -163,6 +169,7 @@ footer {
 	height: 30px;
 	width: 30px;
 	background-size: 80% 80%;
+	filter: contrast(400%);
 }
 .places .amenities .smart_home {
 	background-image: url("../images/icons8-smart-home-50.png");
@@ -171,6 +178,7 @@ footer {
 	height: 30px;
 	width: 30px;
 	background-size: 80% 80%;
+	filter: contrast(400%);
 }
 .places .amenities .pool {
 	background-image: url("../images/swimming.png");
@@ -179,6 +187,7 @@ footer {
 	height: 30px;
 	width: 30px;
 	background-size: 80% 80%;
+	filter: contrast(400%);
 }
 .places .amenities .football {
 	background-image: url("../images/football.png");
@@ -187,6 +196,7 @@ footer {
 	height: 30px;
 	width: 30px;
 	background-size: 80% 80%;
+	filter: contrast(400%);
 }
 .places .amenities .saloon {
 	background-image: url("../images/hair-dryer.png");
@@ -195,6 +205,7 @@ footer {
 	height: 30px;
 	width: 30px;
 	background-size: 80% 80%;
+	filter: contrast(400%);
 }
 .places .amenities li {
 	display: block;
@@ -205,6 +216,18 @@ footer {
 	width: max-content;
 	font-size: 16px;
 	margin-left: 50px;
+}
+/*=====Reviews Section=====*/
+.places .reviews {
+	margin-top: 40px;
+}
+.places .reviews h3 {
+	margin-top: 10px;
+	font-size: 14px;
+	font-weight: 600;
+}
+.places .reviews p {
+	font-size: 12px;
 }
 /*=====Redifining Strong=====*/
 strong {
