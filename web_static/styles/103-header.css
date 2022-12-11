@@ -1,1 +1,10 @@
-
+/*=== === Header style === ===*/
+header {
+	background-image: url("../images/logo.png");
+	background-color: white;
+	background-position: 20px center;
+	background-repeat: no-repeat;
+	border-bottom: 1px solid #ccc;
+	height: 70px;
+	width: 100%;
+}

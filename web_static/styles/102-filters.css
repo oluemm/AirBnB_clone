@@ -66,19 +66,16 @@
 	border-radius: 4px;
 	display: none;
 	position: absolute;
-	margin-top: -10px;
 	width: 100%;
 }
 
 .filters .locations:hover .popover {
 	display: block;
 	margin-left: auto;
-	position: relative;
 }
 
 .filters .amenities:hover .popover {
 	display: block;
-	position: relative;
 	margin-left: -5px;
 }
 
