@@ -1,1 +1,165 @@
+/*=== Filters Class ===*/
 
+/*===== Filters style =====*/
+.filters {
+	background-color: white;
+	height: 70px;
+	width: 100%;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+/*===== Search button style =====*/
+.filters button {
+	font-size: 18px;
+	background: #ff5a5f;
+	color: #fff;
+	height: 48px;
+	width: 20%;
+	border: 0;
+	border-radius: 4px;
+	margin: 12px 30px;
+	float: right;
+	min-width: 100px;
+}
+
+/*===== Search button hover opacity =====*/
+.filters button:hover {
+	opacity: 90%;
+}
+/*===== Locations and Amenities Filters =====*/
+.locations,
+.amenities {
+	height: 100%;
+	width: 25%;
+	display: inline-block;
+	position: relative;
+}
+
+.locations {
+	border-right: 1px solid #ddd;
+}
+
+/*== Title ==*/
+.locations h3,
+.amenities h3 {
+	/*Since I decided to reset all tags, I've to reassign default h3 font-size back*/
+	font-size: 18.72px;
+	font-weight: 600;
+	padding: 15px 0 0 30px;
+	box-sizing: border-box;
+}
+
+/*== Subtitle ==*/
+.locations h4,
+.amenities h4 {
+	height: 50%;
+	font-weight: 400;
+	padding: 6px 0px 0px 30px;
+	box-sizing: border-box;
+}
+
+/*===== On-Hover Dropdowns =====*/
+.popover {
+	border: 1px solid #ddd;
+	background-color: #fafafa;
+	border-radius: 4px;
+	display: none;
+	position: absolute;
+	margin-top: -10px;
+	width: 100%;
+}
+
+.filters .locations:hover .popover {
+	display: block;
+	margin-left: auto;
+	position: relative;
+}
+
+.filters .amenities:hover .popover {
+	display: block;
+	position: relative;
+	margin-left: -5px;
+}
+
+/* Locations list style */
+.filters .locations ul {
+	padding: 6px 0 6px 6px;
+}
+
+/* Locations list element margin */
+.filters .locations li {
+	margin: 0 auto 6px 50px;
+}
+
+/* Amenities list element margin */
+.filters .amenities li {
+	margin: 12px auto 12px 30px;
+}
+
+/* Header 2 style */
+.filters h2 {
+	font-size: 16px;
+	font-weight: bold;
+	margin: 12px auto 0 30px;
+	box-sizing: border-box;
+}
+
+/*===Filters responsive sizing===*/
+/* Swap to vertical layout for small screens */
+/* Maintain shape of search bar as screen gets smaller */
+@media only screen and (max-width: 1280px) {
+	.filters {
+		width: 95%;
+		margin: auto;
+	}
+
+	.filters .locations:hover .popover,
+	.filters .amenities:hover .popover {
+		margin-top: -1px;
+		position: absolute;
+		z-index: 1;
+	}
+}
+
+/* Swap to vertical layout for small screens */
+@media only screen and (max-width: 720px) {
+	.filters {
+		display: grid;
+		height: 210px;
+	}
+
+	.filters .locations,
+	.filters .amenities {
+		height: 70px;
+		width: 100%;
+		border-bottom: 1px solid #ddd;
+	}
+
+	.filters .locations:hover .popover,
+	.filters .amenities:hover .popover {
+		margin-left: auto;
+		margin-top: -73px;
+		position: relative;
+		border-radius: 0%;
+		width: 50%;
+		z-index: 1;
+	}
+}
+/*
+ * --- Contain search button float ---
+ */
+
+.filters:before,
+.filters:after {
+	content: "";
+	display: table;
+}
+
+.filters:after {
+	clear: both;
+}
+
+.filters {
+	*zoom: 1;
+}
